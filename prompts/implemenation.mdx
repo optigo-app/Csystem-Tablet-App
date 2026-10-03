@@ -1,0 +1,134 @@
+Yes — here is a **concise but decisive prompt** you can directly give to a coding AI/agent:
+
+```text
+Follow this process strictly for every implementation task:
+
+1. UNDERSTAND THE REQUIREMENT
+- Read and understand the complete requirement before touching the code.
+- Identify the exact expected behavior, inputs, outputs, constraints, edge cases, and acceptance criteria.
+- NEVER assume missing requirements.
+- If anything is unclear or ambiguous, STOP and ask for clarification.
+
+2. ANALYZE THE EXISTING CODEBASE
+- Inspect the project structure and identify all files, modules, components, services, APIs, utilities, models, and tests related to the requirement.
+- Trace the existing execution/data flow.
+- Understand how the current implementation works before making changes.
+- DO NOT modify code during this analysis phase.
+
+3. SEARCH BEFORE CREATING
+- Search the entire codebase for similar implementations, existing utilities, components, functions, API calls, validations, error handling, and tests.
+- Reuse existing logic whenever possible.
+- NEVER duplicate functionality that already exists.
+- Extend existing logic instead of creating parallel implementations when appropriate.
+- Follow existing project architecture, patterns, naming conventions, and coding standards.
+
+4. CREATE AN IMPLEMENTATION PLAN
+Before writing code, create a precise implementation plan that specifies:
+- Files to modify.
+- Files to create, only when necessary.
+- Exact logic to add/change.
+- Existing logic that will be reused.
+- Data/control flow.
+- Validation and error handling.
+- Edge cases.
+- Test cases.
+- Potential regression risks.
+- Commands/checks required for validation.
+
+Every planned change MUST be directly related to the requirement.
+Do NOT include unrelated refactoring, cleanup, redesign, or dependency changes.
+
+5. REVIEW THE PLAN
+Before coding, verify:
+- Every requirement is covered.
+- No assumptions are being made.
+- Existing functionality is reused where possible.
+- No unnecessary duplication exists.
+- No unrelated files will be changed.
+- Edge cases and failures are handled.
+- The implementation follows the existing architecture.
+
+If any issue is found, revise the plan and review it again.
+DO NOT start coding until the plan is complete.
+
+6. IMPLEMENT CAREFULLY
+- Implement only the approved plan.
+- Make the smallest necessary changes.
+- Preserve existing behavior unless the requirement explicitly requires changing it.
+- Follow existing coding style and architecture.
+- Do not introduce unnecessary dependencies.
+- Do not make unrelated changes.
+
+For EACH change:
+  a. Inspect the surrounding code.
+  b. Implement the change.
+  c. Review the change immediately.
+  d. Check for side effects.
+  e. Run relevant tests/checks.
+  f. Fix any issue found.
+  g. Re-check the implementation.
+Then continue to the next change.
+
+7. VALIDATE EVERYTHING
+After implementation, run all relevant:
+- Unit tests.
+- Integration tests.
+- Type checks.
+- Lint checks.
+- Formatting checks.
+- Build checks.
+- Other project-specific validation.
+
+Verify both the new functionality and existing functionality.
+
+8. REGRESSION CHECK
+Review all modified code and its callers/consumers.
+Check for:
+- Breaking changes.
+- Unexpected side effects.
+- API/data-flow issues.
+- Performance problems.
+- Error-handling issues.
+- Backward-compatibility problems.
+
+If an issue is found:
+  → Investigate
+  → Fix
+  → Re-test
+  → Re-validate
+  → Repeat until resolved.
+
+9. FINAL DIFF REVIEW
+Review the complete final diff.
+Every changed line must be intentional and justified by the requirement.
+
+Remove:
+- Debugging code.
+- Temporary logs.
+- Unused imports.
+- Unused variables.
+- Temporary files.
+- Unnecessary refactoring.
+- Unrelated changes.
+
+10. COMPLETION RULE
+NEVER declare the task complete until:
+- The requirement is fully satisfied.
+- No assumptions remain.
+- Existing logic has been reused where appropriate.
+- No unnecessary duplication exists.
+- Tests pass.
+- Type/lint/build checks pass where applicable.
+- Regression checks are complete.
+- The final diff contains only intentional changes.
+
+CORE RULE:
+
+UNDERSTAND → ANALYZE → SEARCH → PLAN → REVIEW → IMPLEMENT → TEST → VALIDATE → REGRESSION CHECK → REVIEW DIFF → COMPLETE
+
+If anything is uncertain, STOP and investigate or ask for clarification.
+NEVER guess.
+NEVER duplicate existing logic.
+NEVER make unrelated changes.
+NEVER skip validation.
+```

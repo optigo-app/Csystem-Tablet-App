@@ -1,42 +1,39 @@
+// Entry.js - Application Route Configuration matching Flutter's app_router.dart
 import React from "react";
-import { Routes, Route } from "react-router-dom";
-import TicketUi from "./components/TicketUi/components";
-import ClientTicketUi from "./components/TicketUi/client";
-import HeaderWrapper from "./components/HeaderWrapper";
-import CustomerAdd from "./components/_ui/CustomerAdd";
-import DeliveryDashboard from "./components/Delivery&Training/components/Delivery/Main";
-import TrainingDashboard from "./components/Delivery&Training/components/Training/Main";
-import CallLogDashBoard from "./components/CallLogger";
-import NotFoundPage from "./components/_ui/NotFound";
+import { Routes, Route, Navigate } from "react-router-dom";
+import SplashScreen from "./screens/SplashScreen";
+import PasswordLogin from "./screens/PasswordLogin";
+import HomeScreen from "./screens/HomeScreen";
+import ExpiredScreen from "./screens/ExpiredScreen";
+import DisabledScreen from "./screens/DisabledScreen";
+import NoConnectionScreen from "./screens/NoConnectionScreen";
 
 const Entry = () => {
-	const [open, setOpen] = React.useState(false);
-	const handleOpen = () => {
-		setOpen(true);
-	};
-	const handleClose = () => {
-		setOpen(false);
-	};
+  return (
+    <Routes>
+      {/* Root / Splash Screen */}
+      <Route path="/" element={<SplashScreen />} />
 
-	return (
-		<>
-			<HeaderWrapper handleOpen={handleOpen}>
-				<CustomerAdd handleClose={handleClose} open={open} />
-				<Routes>
-					<Route path="/" element={<CallLogDashBoard />} />
-					<Route path="/Ticket" element={<TicketUi />} />
-					{/* <Route path="/Ticket/Client" element={<ClientTicketUi />} /> */}
-					<Route path="/Delivery" element={<DeliveryDashboard />} />
-					<Route path="/Training" element={<TrainingDashboard />} />
-					{/* <Route path="/test" element={<SignUp />} /> */}
-					{/* <Route path='/customer-info' element={<><CustomerInfo /></>} /> */}
-					{/* <Route path='/add-new-customer' element={<><CustomerRegistrationForm/></>} /> */}
-					<Route path="*" element={<NotFoundPage />} />
-					{/* <Route path='/test-grid' element={<><ReactVirtualizedTable /></>} /> */}
-				</Routes>
-			</HeaderWrapper>
-		</>
-	);
+      {/* Authentication */}
+      <Route path="/login" element={<PasswordLogin />} />
+      <Route path="/passwordLogin" element={<PasswordLogin />} />
+
+      {/* Main Dashboard */}
+      <Route path="/home" element={<HomeScreen />} />
+      <Route path="/homeScreen" element={<HomeScreen />} />
+
+      {/* Status Screens */}
+      <Route path="/expired" element={<ExpiredScreen />} />
+      <Route path="/expiredScreen" element={<ExpiredScreen />} />
+      <Route path="/disabled" element={<DisabledScreen />} />
+      <Route path="/disabledScreen" element={<DisabledScreen />} />
+      <Route path="/noConnectionScreen" element={<NoConnectionScreen />} />
+      <Route path="/no-connection" element={<NoConnectionScreen />} />
+
+      {/* Fallback */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
 };
 
 export default Entry;

@@ -1,42 +1,54 @@
-import "./styles/index.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "swiper/css/navigation";
-import "swiper/css";
-import React, { Suspense } from "react";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import Entry from "./Entry";
-import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from "@mui/material/styles";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { registerAuthServiceWorker } from "./utils/registerAuthServiceWorker";
-import { Maintheme } from "./libs/DateTheme";
+import { NotificationProvider } from "./context/NotificationManager";
+import { SocketProvider } from "./context/SocketContext";
 import { AuthProvider } from "./context/UseAuth";
-import { TicketProvider } from "./context/useTicket";
 import { CallLogProvider } from "./context/UseCallLog";
-import "@fontsource/poppins";
+import { TicketProvider } from "./context/useTicket";
+import "@fontsource-variable/raleway";
+import "@fontsource-variable/sora/wght.css";
+import "./styles/app.css";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
-registerAuthServiceWorker();
+const Theme = createTheme({
+	typography: {
+		// fontFamily: "Raleway Variable, sans-serif",
+		fontFamily: "Sora Variable, sans-serif",
+	},
+});
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-	<>
-		<Suspense fallback={<div></div>}>
-			<BrowserRouter basename={process.env.NODE_ENV === "production" ? "/calllogweb/" : "/"}>
-				<AuthProvider>
-					<CallLogProvider>
-						<TicketProvider>
-							<ThemeProvider theme={Maintheme}>
-								<LocalizationProvider dateAdapter={AdapterDateFns}>
+const Main = () => {
+	return (
+		<>
+			<BrowserRouter>
+				<SocketProvider>
+					<AuthProvider>
+						<NotificationProvider>
+							<CallLogProvider>
+								<TicketProvider>
 									<CssBaseline />
 									<Entry />
-								</LocalizationProvider>
-							</ThemeProvider>
-						</TicketProvider>
-					</CallLogProvider>
-				</AuthProvider>
+								</TicketProvider>
+							</CallLogProvider>
+						</NotificationProvider>
+					</AuthProvider>
+				</SocketProvider>
 			</BrowserRouter>
-		</Suspense>
-	</>,
+		</>
+	);
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+	<ThemeProvider theme={Theme}>
+		<Main />
+	</ThemeProvider>,
 );
+
+// Register production-grade service worker for PWA offline capabilities
+serviceWorkerRegistration.register();

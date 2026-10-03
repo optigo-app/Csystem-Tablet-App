@@ -8,6 +8,8 @@
  * @property {string} searchQuery
  * @property {string} category
  * @property {string} appname
+ * @property {string[]} mentions
+ * @property {string[]} mentionedBy
  */
 
 /**
@@ -34,6 +36,8 @@ const defaultFilters = {
 	searchQuery: "",
 	category: "",
 	appname: "",
+	mentions: [],
+	mentionedBy: [],
 };
 
 // Only keep values that are truly meaningful
@@ -66,6 +70,8 @@ export const useUrlFilters = () => {
 			searchQuery: query?.searchQuery || "",
 			category: query?.category || "",
 			appname: query?.appname || "",
+			mentions: typeof query?.mentions === "string" ? query?.mentions?.split(",").filter(Boolean) : Array.isArray(query?.mentions) ? query?.mentions.filter(Boolean) : [],
+			mentionedBy: typeof query?.mentionedBy === "string" ? query?.mentionedBy?.split(",").filter(Boolean) : Array.isArray(query?.mentionedBy) ? query?.mentionedBy.filter(Boolean) : [],
 		};
 
 		setFilters(parsedFilters);
