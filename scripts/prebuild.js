@@ -2,10 +2,6 @@ const fs = require("fs");
 const path = require("path");
 
 const packageJsonPath = path.join(__dirname, "../package.json");
-const versionJsonPath = path.join(
-  __dirname,
-  "../src/components/AccountCenter/tabs/version.json",
-);
 
 try {
   // 1. Read package.json
@@ -32,20 +28,6 @@ try {
   fs.writeFileSync(
     packageJsonPath,
     JSON.stringify(packageJson, null, "\t") + "\n",
-    "utf8",
-  );
-
-  // 3. Write version.json for SupportTab to import
-  const versionData = {
-    version: `v${newVersion}`,
-  };
-  const versionDir = path.dirname(versionJsonPath);
-  if (!fs.existsSync(versionDir)) {
-    fs.mkdirSync(versionDir, { recursive: true });
-  }
-  fs.writeFileSync(
-    versionJsonPath,
-    JSON.stringify(versionData, null, 2),
     "utf8",
   );
 
